@@ -1,3 +1,4 @@
 # Kmeans-Python
-Usage
+Usage   
+
 python kmeans.py filename no_of_clusters
