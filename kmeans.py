@@ -22,7 +22,6 @@ def normalize(data):
 
 def check_equal(a,b):
 	for i in a.keys():
-		#print a[i],b[i]
 		if not(np.array_equal(a[i],b[i])):
 			return 0
 	return 1
@@ -35,7 +34,7 @@ def main():
 		data = []
 		file = sys.argv[1]
 		cluster = int(sys.argv[2])
-        directory = os.getcwd() if len(sys.argv) != 3 else sys.argv[2]
+		out_file = sys.argv[3] if len(sys.argv) == 4 else "output.txt"
         with open(file,'r') as f:
 			d = f.readlines()
 			for i in d:
@@ -53,10 +52,8 @@ def main():
 		belongs_to = {i+1 : [] for i in range(cluster)}
 		old_clust = dict(clust)
 		allot_clust(data,clust,no_of_Samp,belongs_to)
-		print clust,"\n"
 		if check_equal(old_clust,clust):
-			with open("output.txt",'w') as f:
-				print clust.values()
+			with open(out_file,'w') as f:
 				for i in clust.keys():
 					f.write(str(clust[i])[1:-1])
 					f.write("\n")
